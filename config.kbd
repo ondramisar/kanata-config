@@ -1,0 +1,55 @@
+;; defsrc is still necessary
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defvar
+  tap-time 150
+  hold-time 200
+)
+
+(defalias
+  tab (tap-hold $tap-time $hold-time tab esc)
+  caps (layer-while-held nav)
+  spc (tap-hold $tap-time $hold-time spc (layer-toggle sym))
+  a (multi f24 (tap-hold $tap-time $hold-time a lmet))
+  s (multi f24 (tap-hold $tap-time $hold-time s lalt))
+  d (multi f24 (tap-hold $tap-time $hold-time d lsft))
+  f (multi f24 (tap-hold $tap-time $hold-time f lctl))
+  j (multi f24 (tap-hold $tap-time $hold-time j rctl))
+  k (multi f24 (tap-hold $tap-time $hold-time k rsft))
+  l (multi f24 (tap-hold $tap-time $hold-time l lalt))
+  ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
+)
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  @tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @caps @a    @s    @d    @f    g    h    @j    @k    @l    @;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           @spc            bspc rmet rctl
+)
+
+(deflayer nav
+  _  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _  _    _    _    _    _    bspc    left    down    up    right   _    _
+  _  _    _    _    _    _    _    _    _    _    _    _ 
+  _ _ _           _            _ _ _
+)
+
+(deflayer sym
+  _  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _  S-1    S-2    S-3    S-4    S-5    S-6    S-7    S-8     S-9   S-0    _  _  _
+  _ S-,    S-.    =    -    /    bspc    [    ]    S-[    S-]    _    _
+  _  _    _    _    _    _    _    _    _    _    _    _ 
+  _ _ _           _            _ _ _
+)
